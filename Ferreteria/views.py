@@ -10,12 +10,13 @@ from .forms import (
     ClienteLoginForm,
     ProductoForm,
     RegistroUsuarioForm,
+    UserEditForm,
 )
 from .models import Producto
 
 
 def index(request):
-    productos = Producto.objects.filter(archivado=False).order_by('-id')[:6]
+    productos = Producto.objects.filter(archivado=False).order_by('-id')
     total_productos = Producto.objects.filter(archivado=False).count()
     carrito = request.session.get('carrito', {})
     total_carrito = sum(carrito.values())
@@ -26,6 +27,25 @@ def index(request):
         'total_carrito': total_carrito,
     }
     return render(request, 'Ferreteria/index.html', context)
+
+
+def catalogo(request):
+    productos = Producto.objects.filter(archivado=False).order_by('categoria', 'nombre')
+    categorias = list(
+        Producto.objects.filter(archivado=False)
+        .values_list('categoria', flat=True)
+        .distinct()
+        .order_by('categoria')
+    )
+    carrito = request.session.get('carrito', {})
+    total_carrito = sum(carrito.values())
+
+    return render(request, 'Ferreteria/catalogo.html', {
+        'productos': productos,
+        'categorias': categorias,
+        'total_productos': productos.count(),
+        'total_carrito': total_carrito,
+    })
 
 
 def registro(request):
@@ -136,15 +156,23 @@ def confirmar_compra(request):
 
 
 def login_admin(request):
-    if request.user.is_authenticated and request.user.is_staff:
-        return redirect('admin_dashboard')
+    if request.user.is_authenticated:
+        if request.user.username == 'Admin1' and request.user.is_staff:
+            return redirect('admin_dashboard')
+        logout(request)
+        messages.info(request, 'El acceso administrativo está reservado para Admin1.')
 
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = (request.POST.get('username') or '').strip()
+        password = request.POST.get('password') or ''
+
+        if username != 'Admin1':
+            messages.error(request, 'El panel administrativo solo puede acceder el usuario Admin1.')
+            return render(request, 'Ferreteria/login_admin.html')
+
         user = authenticate(request, username=username, password=password)
 
-        if user is not None and user.is_staff:
+        if user is not None and user.is_staff and user.username == 'Admin1':
             login(request, user)
             messages.success(request, 'Bienvenido al panel administrativo.')
             return redirect('admin_dashboard')
@@ -154,20 +182,40 @@ def login_admin(request):
     return render(request, 'Ferreteria/login_admin.html')
 
 
+def require_admin1(request):
+    if not request.user.is_authenticated or request.user.username != 'Admin1' or not request.user.is_staff:
+        logout(request)
+        messages.error(request, 'Este panel es exclusivo del usuario Admin1.')
+        return redirect('login_admin')
+    return None
+
+
 @login_required(login_url='login_admin')
 @staff_member_required(login_url='login_admin')
 def admin_dashboard(request):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
+
     productos = Producto.objects.order_by('-id')
     usuarios = User.objects.order_by('-date_joined')
+    productos_activos = productos.filter(archivado=False).count()
+    productos_archivados = productos.filter(archivado=True).count()
+
     return render(request, 'Ferreteria/admin_dashboard.html', {
         'productos': productos,
         'usuarios': usuarios,
+        'productos_activos': productos_activos,
+        'productos_archivados': productos_archivados,
     })
 
 
 @login_required(login_url='login_admin')
 @staff_member_required(login_url='login_admin')
 def product_form(request, pk=None):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
     producto = Producto.objects.get(pk=pk) if pk else None
     form = ProductoForm(request.POST or None, instance=producto)
 
@@ -186,6 +234,10 @@ def product_form(request, pk=None):
 @staff_member_required(login_url='login_admin')
 @require_POST
 def toggle_archivo(request, pk):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
+
     producto = Producto.objects.get(pk=pk)
     producto.archivado = not producto.archivado
     producto.save()
@@ -198,6 +250,10 @@ def toggle_archivo(request, pk):
 @staff_member_required(login_url='login_admin')
 @require_POST
 def delete_producto(request, pk):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
+
     producto = Producto.objects.get(pk=pk)
     producto.delete()
     messages.success(request, 'Producto eliminado correctamente.')
@@ -206,8 +262,33 @@ def delete_producto(request, pk):
 
 @login_required(login_url='login_admin')
 @staff_member_required(login_url='login_admin')
+def user_form(request, pk):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
+
+    usuario = get_object_or_404(User, pk=pk)
+    form = UserEditForm(request.POST or None, instance=usuario)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Usuario actualizado correctamente.')
+        return redirect('admin_dashboard')
+
+    return render(request, 'Ferreteria/user_form.html', {
+        'form': form,
+        'usuario': usuario,
+    })
+
+
+@login_required(login_url='login_admin')
+@staff_member_required(login_url='login_admin')
 @require_POST
 def toggle_user(request, pk):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
+
     usuario = User.objects.get(pk=pk)
     if request.user.pk == usuario.pk:
         messages.error(request, 'No puedes desactivar tu propia cuenta de administrador.')
@@ -224,6 +305,10 @@ def toggle_user(request, pk):
 @staff_member_required(login_url='login_admin')
 @require_POST
 def delete_user(request, pk):
+    redirect_result = require_admin1(request)
+    if redirect_result is not None:
+        return redirect_result
+
     usuario = User.objects.get(pk=pk)
     if request.user.pk == usuario.pk:
         messages.error(request, 'No puedes eliminar tu propia cuenta de administrador.')

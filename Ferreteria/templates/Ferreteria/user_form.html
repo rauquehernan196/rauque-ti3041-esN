@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar usuario</title>
+    <link rel="stylesheet" href="{% static 'Ferreteria/css/style.css' %}">
+</head>
+<body class="admin-shell-body">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-mark"></div>
+                <span>Ferretería Pro</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+                <a href="{% url 'admin_dashboard' %}#productos-section">Productos</a>
+                <a href="{% url 'admin_dashboard' %}#usuarios-section">Usuarios</a>
+                <a href="{% url 'logout_admin' %}">Cerrar sesión</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-panel">
+                <div class="panel-header">
+                    <div>
+                        <p class="panel-kicker">Administración</p>
+                        <h1>Editar usuario</h1>
+                    </div>
+                    <a class="secondary-btn" href="{% url 'admin_dashboard' %}">Volver</a>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" class="admin-form product-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="field-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <small class="error-text">{{ field.errors|join:', ' }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

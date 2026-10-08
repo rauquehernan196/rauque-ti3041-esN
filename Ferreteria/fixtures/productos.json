@@ -1,42 +1,442 @@
 [
-  {"model": "Ferreteria.producto", "pk": 1, "fields": {"nombre": "Martillo de Uña Carpintero 16 oz", "categoria": "Herramientas Manuales", "precio": 7990, "stock": 25}},
-  {"model": "Ferreteria.producto", "pk": 2, "fields": {"nombre": "Set de Destornilladores 6 Piezas", "categoria": "Herramientas Manuales", "precio": 12490, "stock": 18}},
-  {"model": "Ferreteria.producto", "pk": 3, "fields": {"nombre": "Alicate Universal 7 Pulgadas", "categoria": "Herramientas Manuales", "precio": 6500, "stock": 30}},
-  {"model": "Ferreteria.producto", "pk": 4, "fields": {"nombre": "Llave Ajustable 10 Pulgadas", "categoria": "Herramientas Manuales", "precio": 9990, "stock": 15}},
-  {"model": "Ferreteria.producto", "pk": 5, "fields": {"nombre": "Cuchillo Cartonero Profesional", "categoria": "Herramientas Manuales", "precio": 2990, "stock": 40}},
-  {"model": "Ferreteria.producto", "pk": 6, "fields": {"nombre": "Sierra Manual para Madera 20 Pulgadas", "categoria": "Herramientas Manuales", "precio": 8990, "stock": 12}},
-  {"model": "Ferreteria.producto", "pk": 7, "fields": {"nombre": "Huincha de Medir 5 Metros", "categoria": "Herramientas Manuales", "precio": 3990, "stock": 50}},
-  {"model": "Ferreteria.producto", "pk": 8, "fields": {"nombre": "Nivel de Aluminio 24 Pulgadas", "categoria": "Herramientas Manuales", "precio": 11990, "stock": 10}},
-  {"model": "Ferreteria.producto", "pk": 9, "fields": {"nombre": "Taladro Percutor 650W 13mm", "categoria": "Herramientas Eléctricas", "precio": 39990, "stock": 8}},
-  {"model": "Ferreteria.producto", "pk": 10, "fields": {"nombre": "Esmeril Angular 4.5 Pulgadas 700W", "categoria": "Herramientas Eléctricas", "precio": 34990, "stock": 14}},
-  {"model": "Ferreteria.producto", "pk": 11, "fields": {"nombre": "Sierra Caladora 550W", "categoria": "Herramientas Eléctricas", "precio": 29990, "stock": 6}},
-  {"model": "Ferreteria.producto", "pk": 12, "fields": {"nombre": "Lijadora de Banda 800W", "categoria": "Herramientas Eléctricas", "precio": 45990, "stock": 5}},
-  {"model": "Ferreteria.producto", "pk": 13, "fields": {"nombre": "Atornillador Inalámbrico 12V", "categoria": "Herramientas Eléctricas", "precio": 42990, "stock": 11}},
-  {"model": "Ferreteria.producto", "pk": 14, "fields": {"nombre": "Pistola de Calor 2000W", "categoria": "Herramientas Eléctricas", "precio": 24990, "stock": 9}},
-  {"model": "Ferreteria.producto", "pk": 15, "fields": {"nombre": "Caja de Clavos Corrientes 2 Pulgadas 1kg", "categoria": "Fijaciones", "precio": 3290, "stock": 45}},
-  {"model": "Ferreteria.producto", "pk": 16, "fields": {"nombre": "Tornillo Madera Fix 4x40mm (Caja 100 uds)", "categoria": "Fijaciones", "precio": 2890, "stock": 35}},
-  {"model": "Ferreteria.producto", "pk": 17, "fields": {"nombre": "Tarugo Nylon 8mm con Tornillo (50 uds)", "categoria": "Fijaciones", "precio": 4190, "stock": 28}},
-  {"model": "Ferreteria.producto", "pk": 18, "fields": {"nombre": "Perno Coche 3/8 x 3 Pulgadas (20 uds)", "categoria": "Fijaciones", "precio": 5490, "stock": 22}},
-  {"model": "Ferreteria.producto", "pk": 19, "fields": {"nombre": "Esmalte al Agua Blanco Tineta", "categoria": "Pinturas", "precio": 48990, "stock": 7}},
-  {"model": "Ferreteria.producto", "pk": 20, "fields": {"nombre": "Óleo Opaco Blanco Galón", "categoria": "Pinturas", "precio": 22990, "stock": 13}},
-  {"model": "Ferreteria.producto", "pk": 21, "fields": {"nombre": "Látex Extracubriente Gris 1 Galón", "categoria": "Pinturas", "precio": 18990, "stock": 16}},
-  {"model": "Ferreteria.producto", "pk": 22, "fields": {"nombre": "Antióxido Negro Galón", "categoria": "Pinturas", "precio": 19990, "stock": 10}},
-  {"model": "Ferreteria.producto", "pk": 23, "fields": {"nombre": "Barniz Marítimo Natural Galón", "categoria": "Pinturas", "precio": 24990, "stock": 12}},
-  {"model": "Ferreteria.producto", "pk": 24, "fields": {"nombre": "Rodillo Antigoteo 23 cm", "categoria": "Accesorios de Pintura", "precio": 3490, "stock": 30}},
-  {"model": "Ferreteria.producto", "pk": 25, "fields": {"nombre": "Brocha Cerda Natural 3 Pulgadas", "categoria": "Accesorios de Pintura", "precio": 2690, "stock": 38}},
-  {"model": "Ferreteria.producto", "pk": 26, "fields": {"nombre": "Bandeja para Pintura Plástica", "categoria": "Accesorios de Pintura", "precio": 1890, "stock": 25}},
-  {"model": "Ferreteria.producto", "pk": 27, "fields": {"nombre": "Cinta Masking Tape 48mm x 50m", "categoria": "Accesorios de Pintura", "precio": 2290, "stock": 42}},
-  {"model": "Ferreteria.producto", "pk": 28, "fields": {"nombre": "Tubo PVC Hidráulico 20mm x 6m", "categoria": "Gasfitería", "precio": 4590, "stock": 20}},
-  {"model": "Ferreteria.producto", "pk": 29, "fields": {"nombre": "Codo PVC 90 Grados 20mm", "categoria": "Gasfitería", "precio": 490, "stock": 50}},
-  {"model": "Ferreteria.producto", "pk": 30, "fields": {"nombre": "Adhesivo para PVC Vinilit 125g", "categoria": "Gasfitería", "precio": 3890, "stock": 24}},
-  {"model": "Ferreteria.producto", "pk": 31, "fields": {"nombre": "Cinta Teflón 1/2 Pulgada x 10m", "categoria": "Gasfitería", "precio": 890, "stock": 48}},
-  {"model": "Ferreteria.producto", "pk": 32, "fields": {"nombre": "Llave de Paso Bola 1/2 Bronce", "categoria": "Gasfitería", "precio": 5990, "stock": 17}},
-  {"model": "Ferreteria.producto", "pk": 33, "fields": {"nombre": "Cable Eléctrico EVA 2.5mm2 Rollo 100m", "categoria": "Electricidad", "precio": 38990, "stock": 6}},
-  {"model": "Ferreteria.producto", "pk": 34, "fields": {"nombre": "Interruptor Embutido Blanco 1 Módulo", "categoria": "Electricidad", "precio": 2190, "stock": 32}},
-  {"model": "Ferreteria.producto", "pk": 35, "fields": {"nombre": "Enchufe Hembra Doble Sobrepuesto", "categoria": "Electricidad", "precio": 2890, "stock": 27}},
-  {"model": "Ferreteria.producto", "pk": 36, "fields": {"nombre": "Cinta Aisladora Negra 18m", "categoria": "Electricidad", "precio": 1290, "stock": 40}},
-  {"model": "Ferreteria.producto", "pk": 37, "fields": {"nombre": "Automático Termomagnético 16A Single", "categoria": "Electricidad", "precio": 4990, "stock": 19}},
-  {"model": "Ferreteria.producto", "pk": 38, "fields": {"nombre": "Silicona Transparente Multiuso 280ml", "categoria": "Adhesivos y Selladores", "precio": 3990, "stock": 22}},
-  {"model": "Ferreteria.producto", "pk": 39, "fields": {"nombre": "Espuma de Poliuretano Expansiva 500ml", "categoria": "Adhesivos y Selladores", "precio": 6490, "stock": 15}},
-  {"model": "Ferreteria.producto", "pk": 40, "fields": {"nombre": "Adhesivo Montaje Agarre Rápido 300g", "categoria": "Adhesivos y Selladores", "precio": 4890, "stock": 18}}
+  {
+    "model": "Ferreteria.producto",
+    "pk": 1,
+    "fields": {
+      "nombre": "Martillo de Uña 16 oz",
+      "categoria": "Herramientas Manuales",
+      "precio": 8990,
+      "stock": 25,
+      "imagen": "https://olateferreteria.cl/wp-content/uploads/2025/01/Martillo-Carpintero-Una-Curva-16oz-TRUPER.png"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 2,
+    "fields": {
+      "nombre": "Destornillador #2",
+      "categoria": "Herramientas Manuales",
+      "precio": 3490,
+      "stock": 39,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PS7QafPibaoCS9zoD4cyRIF55XK3w5e347tXtn983A&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 3,
+    "fields": {
+      "nombre": "Alicate Universal 8\"",
+      "categoria": "Herramientas Manuales",
+      "precio": 6990,
+      "stock": 18,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6BUWfGwgPa9iUyropufGqt8fYyZEvKWeOKwOJn6mlDQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 4,
+    "fields": {
+      "nombre": "Llave Ajustable 10\"",
+      "categoria": "Herramientas Manuales",
+      "precio": 9990,
+      "stock": 15,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj_yYPpmZW0VJta-9ohMsYfZDNeuvfoHNzJlXmodqtqg&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 5,
+    "fields": {
+      "nombre": "Juego de Llaves Allen 9 pzs",
+      "categoria": "Herramientas Manuales",
+      "precio": 7490,
+      "stock": 30,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShdgPoXfAfBnWNTia0R-jzM8-fpZKLWOCPrG-xLhYF3A&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 6,
+    "fields": {
+      "nombre": "Taladro Percutor 650W",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 39990,
+      "stock": 10,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEG-yZOtcEf5dHDoj6B1foojOiw7CwJQ05X07RpQR61g&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 7,
+    "fields": {
+      "nombre": "Esmeril Angular 4.5\"",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 34990,
+      "stock": 12,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEtkO9VJwfmSndt8_5iNj7la_ojxMnpduR30d3Ysc9g&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 8,
+    "fields": {
+      "nombre": "Sierra Caladora 550W",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 29990,
+      "stock": 7,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx4RFDLf0Qtjr8XZY1-hAY6Dgjum4h1K9wEj6u24YtqA&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 9,
+    "fields": {
+      "nombre": "Lijadora Orbital 200W",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 24990,
+      "stock": 14,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScuWIbunANiSRzDQe-lFuljfXYS1rIyY05TebT_LwPGQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 10,
+    "fields": {
+      "nombre": "Atornillador Inalámbrico 12V",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 45990,
+      "stock": 0,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVlpUzmQxbIlcYN6nCCCk9qe-k_k-PuOmaEtMO2_kNJg&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 11,
+    "fields": {
+      "nombre": "Caja de Clavos 2\" (1kg)",
+      "categoria": "Fijaciones",
+      "precio": 2990,
+      "stock": 50,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK8F0MwigXgSQU-Fxm7dQp_dKY-inEA2qymAMH09oviA&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 12,
+    "fields": {
+      "nombre": "Tornillo Cobre Madera 4x40mm (100 pzs)",
+      "categoria": "Fijaciones",
+      "precio": 3990,
+      "stock": 64,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt6e8KPoTgdQoR4t9Iocxh_BEaapgYBitj_O03zPWlHg&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 13,
+    "fields": {
+      "nombre": "Tarugos Multiuso 8mm (50 pzs)",
+      "categoria": "Fijaciones",
+      "precio": 1990,
+      "stock": 80,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS0bJIrwXEVjpvzrO2C2XKyY5z1GftvH8_grh_On0O6Q&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 14,
+    "fields": {
+      "nombre": "Perno Coche 3/8x3\" con Tuerca",
+      "categoria": "Fijaciones",
+      "precio": 890,
+      "stock": 120,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ2vWPeHHbKx1dHEUqSuk0TKLOU0umnEMM7H4FTj5_dQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 15,
+    "fields": {
+      "nombre": "Goma y Silicona Transparente 300ml",
+      "categoria": "Adhesivos y Sellantes",
+      "precio": 4290,
+      "stock": 35,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1cji2hbQIAr1Vp_C4XNHtr4Z-3bIwEsd4re7nP8ul8Q&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 16,
+    "fields": {
+      "nombre": "Adhesivo de Contacto 250g",
+      "categoria": "Adhesivos y Sellantes",
+      "precio": 3890,
+      "stock": 22,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3qogP4EQdRliXN6gXRhTPnQeTRK6kqDKUT0olERwuoA&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 17,
+    "fields": {
+      "nombre": "Cinta Enmascarar 24mm x 50m",
+      "categoria": "Pintura y Acabados",
+      "precio": 1490,
+      "stock": 45,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfTY02UdMiRHy208xNmrQGCEnpGKEpF_GPrYqPkzYlcA&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 18,
+    "fields": {
+      "nombre": "Pintura Esmalte Sintético 1 Galón",
+      "categoria": "Pintura y Acabados",
+      "precio": 21990,
+      "stock": 11,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLNLcMGCfH3vykL0QhByLK63Aq8lq2XnIuWONXaWQwew&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 19,
+    "fields": {
+      "nombre": "Brocha 3 Pulgadas",
+      "categoria": "Pintura y Acabados",
+      "precio": 2490,
+      "stock": 28,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ98Yc0t8C_dF8UnUaTfeTxDzTDxCFgoQHvlfqAyOjzoA&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 20,
+    "fields": {
+      "nombre": "Rodillo Antigota 18cm",
+      "categoria": "Pintura y Acabados",
+      "precio": 3990,
+      "stock": 19,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsnQRomlNm4Fw7cFse3R_QKe9WcCxD-uh2IrLJb1_Nrw&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 21,
+    "fields": {
+      "nombre": "Cerradura de Pomo para Dormitorio",
+      "categoria": "Cerrajería",
+      "precio": 8990,
+      "stock": 16,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDuyv0eMFgUAbLyj1jdSCKz5su4ldoyrO41oBt0uVsqQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 22,
+    "fields": {
+      "nombre": "Candado de Bronce 40mm",
+      "categoria": "Cerrajería",
+      "precio": 5490,
+      "stock": 0,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2YJIy9i3fYu_Mu0oNUe1NgeogIrRvfO3RwHmqqhVciQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 23,
+    "fields": {
+      "nombre": "Cinta Aislante Negra 20m",
+      "categoria": "Electricidad",
+      "precio": 990,
+      "stock": 90,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsiEJS4wRTQQvPRZWbRtBs0HCN4mbwETetFvX6z8WyCQ&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 24,
+    "fields": {
+      "nombre": "Cable Unipolar 2.5mm (25m)",
+      "categoria": "Electricidad",
+      "precio": 18990,
+      "stock": 13,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZG_1eVhNyFIyBqqesryKQVMgotmzVh0SOa_IOyIxlmQ&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 25,
+    "fields": {
+      "nombre": "Interruptor Doble Sobrepuesto",
+      "categoria": "Electricidad",
+      "precio": 2190,
+      "stock": 40,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxckag0Fo0BNW66AR67ek--GyTu1Q11Akjow7ZAw5YxQ&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 26,
+    "fields": {
+      "nombre": "Enchufe Hembra Triple",
+      "categoria": "Electricidad",
+      "precio": 2990,
+      "stock": 32,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTja8Par1s2Sjr4n3nqGmJh3d0V6OSoA4g3Ze4_j8xODQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 27,
+    "fields": {
+      "nombre": "Llave de Paso PVC 1/2\"",
+      "categoria": "Gasfitería",
+      "precio": 1890,
+      "stock": 50,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE2yM52v66JBJT14LXG2xZoPSSranRl6aJvNnO-QHbGg&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 28,
+    "fields": {
+      "nombre": "Teflón de Gasfitería 3/4\"",
+      "categoria": "Gasfitería",
+      "precio": 590,
+      "stock": 100,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkSTAosodZU93LEacug4ZVE8bEwcoTY7F1i5AWim77ew&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 29,
+    "fields": {
+      "nombre": "Sifón Lavaplatos Flexible",
+      "categoria": "Gasfitería",
+      "precio": 4990,
+      "stock": 21,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy9HLshoBkTm6EHTkg0jZCiOMN5fhp_ppEtgRZa-Fjiw&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 30,
+    "fields": {
+      "nombre": "Flexible para Agua 40cm",
+      "categoria": "Gasfitería",
+      "precio": 2490,
+      "stock": 38,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3WpO60JZybygXTYwdL7QvESJCZqD-SjRq4nA0V_HHwA&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 31,
+    "fields": {
+      "nombre": "Huincha de Medir 5 metros",
+      "categoria": "Medición",
+      "precio": 3290,
+      "stock": 27,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwa-zNgsl80PTgS7GBJVkuPEUrnjh6Sb4HmDKtdOkTjQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 32,
+    "fields": {
+      "nombre": "Nivel de Burbuja 24\"",
+      "categoria": "Medición",
+      "precio": 7990,
+      "stock": 14,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvuufWIqZiicQEnXiq3v-ctJhv5inGb1prg3zK4cCA3A&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 33,
+    "fields": {
+      "nombre": "Lentes de Seguridad Transparentes",
+      "categoria": "Protección Personal",
+      "precio": 1990,
+      "stock": 60,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPoBeUJq-bTJIEREFf7uHSoBStslxgFICgY3DawpYHrw&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 34,
+    "fields": {
+      "nombre": "Guantes de Cuero Cabritilla",
+      "categoria": "Protección Personal",
+      "precio": 3490,
+      "stock": 42,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJNQyzrKjRjTg37FpXgMIDDS-762EPl032JJJPFGj3vQ&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 35,
+    "fields": {
+      "nombre": "Mascarilla Detección Polvos (10 pzs)",
+      "categoria": "Protección Personal",
+      "precio": 4990,
+      "stock": 0,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHOqlas7YY1V_G5w2SJ9IoQmsjRmck65O7iw_NsxN-Ng&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 36,
+    "fields": {
+      "nombre": "Disco de Corte Metal 4.5\"",
+      "categoria": "Accesorios",
+      "precio": 1290,
+      "stock": 110,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1F79X2lCOr34YMTgYbZtXmow1tCB5BHCWtMHCIAXmRA&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 37,
+    "fields": {
+      "nombre": "Broca para Concreto 8mm",
+      "categoria": "Accesorios",
+      "precio": 1890,
+      "stock": 45,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbrIZ39scMwiRhhN6LUXWF0TSNhl0yRjifMr3pSaCiLg&s"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 38,
+    "fields": {
+      "nombre": "Espátula de Acero Inoxidable 3\"",
+      "categoria": "Herramientas Manuales",
+      "precio": 1990,
+      "stock": 33,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQwmu3L1W1zG6j0_efoSEcknFtwe0lgVRzHMZF05bTeH1gg9UxQHU8iy8&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 39,
+    "fields": {
+      "nombre": "Formón para Madera 1/2\"",
+      "categoria": "Herramientas Manuales",
+      "precio": 4490,
+      "stock": 17,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcih5fdafPq4Q9aRd1wOLFLjd8OJv6jqQX43IawDe68g&s=10"
+    }
+  },
+  {
+    "model": "Ferreteria.producto",
+    "pk": 40,
+    "fields": {
+      "nombre": "Pistola para Silicona Caliente 40W",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 6990,
+      "stock": 20,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGwP4ipxxSZv_KpFXO27_JNwh5QYlLRtJYYJHbpcCcA&s=10"
+    }
+  }
 ]

@@ -8,8 +8,8 @@ from .models import Producto
 class DashboardAndProductsTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='admin',
-            password='password123',
+            username='Admin1',
+            password='Admin123!',
             is_staff=True,
             is_superuser=True,
         )
@@ -38,7 +38,31 @@ class DashboardAndProductsTests(TestCase):
         response = self.client.get(reverse('admin_dashboard'))
         self.assertEqual(response.status_code, 302)
 
-        self.client.login(username='admin', password='password123')
+        self.client.login(username='Admin1', password='Admin123!')
+        response = self.client.get(reverse('admin_dashboard'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_only_admin1_can_access_admin_panel(self):
+        get_user_model().objects.filter(username='Admin1').delete()
+        get_user_model().objects.create_user(
+            username='Admin1',
+            password='Admin123!',
+            is_staff=True,
+            is_superuser=True,
+        )
+        other_admin = get_user_model().objects.create_user(
+            username='OtroAdmin',
+            password='Password123!',
+            is_staff=True,
+        )
+
+        self.client.login(username='OtroAdmin', password='Password123!')
+        response = self.client.get(reverse('admin_dashboard'))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('/login/', response.url)
+
+        self.client.logout()
+        self.client.login(username='Admin1', password='Admin123!')
         response = self.client.get(reverse('admin_dashboard'))
         self.assertEqual(response.status_code, 200)
 
@@ -63,3 +87,39 @@ class DashboardAndProductsTests(TestCase):
         response = self.client.post(reverse('confirmar_compra'))
         self.assertEqual(response.status_code, 302)
         self.assertIn('/cuenta/login/', response.url)
+
+    def test_admin_can_edit_registered_users(self):
+        cliente = get_user_model().objects.create_user(
+            username='cliente_editable',
+            password='Password123!',
+            email='cliente@correo.com',
+            is_staff=False,
+        )
+
+        self.client.login(username='Admin1', password='Admin123!')
+        response = self.client.get(reverse('usuario_editar', args=[cliente.pk]))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Editar usuario')
+
+    def test_catalog_shows_all_active_products_with_images(self):
+        Producto.objects.all().delete()
+        productos = [
+            Producto(
+                nombre=f'Producto {i}',
+                categoria='Herramientas',
+                precio=1000 + i,
+                stock=10 + i,
+                imagen=f'https://images.unsplash.com/photo-1{i}?auto=format&fit=crop&w=900&q=80',
+                archivado=False,
+            )
+            for i in range(40)
+        ]
+        Producto.objects.bulk_create(productos)
+
+        response = self.client.get(reverse('catalogo'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['productos']), 40)
+        self.assertContains(response, 'Producto 0')
+        self.assertContains(response, 'https://images.unsplash.com')

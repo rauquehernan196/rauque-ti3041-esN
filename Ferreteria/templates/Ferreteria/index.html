@@ -28,6 +28,9 @@
                         <div class="avatar">{{ user.username|slice:':1'|upper }}</div>
                         <span>{{ user.username }}</span>
                     </div>
+                    {% if user.is_staff and user.username == 'Admin1' %}
+                        <a href="/admin/" class="primary-btn small-btn" target="_blank" rel="noopener">Panel Admin</a>
+                    {% endif %}
                     <a href="{% url 'logout_cliente' %}" class="secondary-btn small-btn">Salir</a>
                 {% else %}
                     <a href="{% url 'login_cliente' %}" class="secondary-btn small-btn">Iniciar sesión</a>
@@ -56,7 +59,7 @@
                     </p>
 
                     <div class="cta-row">
-                        <a href="#productos" class="primary-btn">Ver catálogo</a>
+                        <a href="{% url 'catalogo' %}" class="primary-btn">Ver catálogo</a>
                         <a href="#categorias" class="secondary-btn">Explorar</a>
                     </div>
 
@@ -119,7 +122,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Categorías destacadas</h2>
-                    <a href="#productos">Ver todo</a>
+                    <a href="{% url 'catalogo' %}">Ver todo</a>
                 </div>
 
                 <div class="category-row premium-category-row">
@@ -162,7 +165,9 @@
                 <div class="product-grid premium-grid-products">
                     {% for producto in productos %}
                     <article class="product-card premium-product-card">
-                        <div class="product-thumb premium-thumb" aria-hidden="true"></div>
+                        <div class="product-thumb premium-thumb">
+                            <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}">
+                        </div>
                         <div class="product-content">
                             <span class="product-tag">{{ producto.categoria }}</span>
                             <h3>{{ producto.nombre }}</h3>

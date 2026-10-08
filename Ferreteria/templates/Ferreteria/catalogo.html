@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo completo | Ferretería Pro</title>
+    <link rel="stylesheet" href="{% static 'Ferreteria/css/style.css' %}">
+</head>
+<body class="premium-body">
+    <header class="instagram-header">
+        <div class="container instagram-nav">
+            <div class="brand" aria-label="Logo de Ferretería Pro">
+                <div class="brand-mark" aria-hidden="true"></div>
+                <span>Ferretería Pro</span>
+            </div>
+
+            <div class="search-box" aria-label="Buscar productos">
+                <span>⌕</span>
+                <input type="text" placeholder="Buscar herramientas y materiales">
+            </div>
+
+            <div class="nav-actions">
+                <a href="{% url 'carrito' %}" class="icon-button cart-button" aria-label="Carrito">🛒</a>
+                {% if user.is_authenticated %}
+                    <div class="profile-pill">
+                        <div class="avatar">{{ user.username|slice:':1'|upper }}</div>
+                        <span>{{ user.username }}</span>
+                    </div>
+                    <a href="{% url 'logout_cliente' %}" class="secondary-btn small-btn">Salir</a>
+                {% else %}
+                    <a href="{% url 'login_cliente' %}" class="secondary-btn small-btn">Iniciar sesión</a>
+                    <a href="{% url 'registro' %}" class="primary-btn small-btn">Registrarse</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    {% if messages %}
+        <div class="container message-stack">
+            {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main class="catalog-page">
+        <div class="container catalog-layout">
+            <aside class="catalog-sidebar" aria-label="Filtrar catálogo por categoría">
+                <div class="catalog-sidebar-header">
+                    <p class="kicker">Inventario</p>
+                    <h2>Categorías</h2>
+                </div>
+
+                <div class="catalog-category-list">
+                    <button type="button" class="category-filter is-active" data-category="todos">Todos los materiales</button>
+                    {% for categoria in categorias %}
+                        <button type="button" class="category-filter" data-category="{{ categoria|slugify }}">{{ categoria }}</button>
+                    {% endfor %}
+                </div>
+            </aside>
+
+            <section class="catalog-results">
+                <div class="catalog-header">
+                    <p class="kicker">Catálogo completo</p>
+                    <h1>Todo lo que necesitas para tu proyecto</h1>
+                    <p id="catalog-counter">Mostrando {{ total_productos }} productos activos con disponibilidad real para compra online.</p>
+                </div>
+
+                <div class="catalog-tools">
+                    <div class="catalog-search-box">
+                        <span>⌕</span>
+                        <input id="catalog-search" type="text" placeholder="Buscar por nombre o categoría">
+                    </div>
+
+                    <div class="catalog-filter-shell">
+                        <label class="catalog-select-wrap" for="categoria-select">
+                            <span>Categoría</span>
+                            <select id="categoria-select">
+                                <option value="todos">Todos</option>
+                                {% for categoria in categorias %}
+                                    <option value="{{ categoria|slugify }}">{{ categoria }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="catalog-grid" id="catalog-grid">
+                    {% for producto in productos %}
+                    <article class="product-card premium-product-card" data-category="{{ producto.categoria|slugify }}" data-name="{{ producto.nombre|lower }}" data-original-category="{{ producto.categoria }}">
+                        <div class="product-thumb premium-thumb">
+                            <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}">
+                        </div>
+                        <div class="product-content">
+                            <span class="product-tag">{{ producto.categoria }}</span>
+                            <h3>{{ producto.nombre }}</h3>
+                            <div class="product-meta">
+                                <div>
+                                    <div class="product-price">${{ producto.precio }}</div>
+                                    <div class="stock">Stock: {{ producto.stock }}</div>
+                                </div>
+                            </div>
+                            <a href="{% url 'agregar_al_carrito' producto.pk %}" class="buy-btn">Agregar al carrito</a>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <p>No hay productos disponibles por el momento.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const searchInput = document.getElementById('catalog-search');
+        const categorySelect = document.getElementById('categoria-select');
+        const categoryButtons = document.querySelectorAll('.category-filter');
+        const cards = document.querySelectorAll('#catalog-grid .product-card');
+        const counter = document.getElementById('catalog-counter');
+        let activeFilter = 'todos';
+
+        function updateCategoryUI() {
+            categoryButtons.forEach((button) => {
+                const selected = button.dataset.category === activeFilter;
+                button.classList.toggle('is-active', selected);
+            });
+            if (categorySelect) {
+                categorySelect.value = activeFilter;
+            }
+        }
+
+        function updateCatalog() {
+            const query = (searchInput.value || '').trim().toLowerCase();
+            let visibleCount = 0;
+
+            cards.forEach((card) => {
+                const category = (card.dataset.category || '').toLowerCase();
+                const name = (card.dataset.name || '').toLowerCase();
+                const originalCategory = (card.dataset.originalCategory || '').toLowerCase();
+                const matchesCategory = activeFilter === 'todos' || category === activeFilter;
+                const matchesSearch = !query || name.includes(query) || originalCategory.includes(query);
+                const visible = matchesCategory && matchesSearch;
+
+                card.style.display = visible ? '' : 'none';
+                if (visible) visibleCount += 1;
+            });
+
+            const total = cards.length;
+            counter.textContent = visibleCount === total
+                ? `Mostrando ${total} productos activos con disponibilidad real para compra online.`
+                : `Mostrando ${visibleCount} de ${total} productos activos.`;
+
+            updateCategoryUI();
+        }
+
+        searchInput.addEventListener('input', updateCatalog);
+
+        categorySelect.addEventListener('change', (event) => {
+            activeFilter = event.target.value || 'todos';
+            updateCatalog();
+        });
+
+        categoryButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                activeFilter = button.dataset.category || 'todos';
+                updateCatalog();
+            });
+        });
+
+        updateCatalog();
+    </script>
+
+    <footer class="footer premium-footer">
+        <div class="container footer-inner">
+            <div>© 2026 Ferretería Pro</div>
+            <div class="footer-links">
+                <a href="{% url 'inicio' %}">Inicio</a>
+                <a href="{% url 'catalogo' %}">Productos</a>
+                <a href="{% url 'carrito' %}">Carrito</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compras</title>
+    <link rel="stylesheet" href="{% static 'Ferreteria/css/style.css' %}">
+</head>
+<body>
+    <header class="instagram-header">
+        <div class="container instagram-nav">
+            <div class="brand">
+                <div class="brand-mark"></div>
+                <span>Ferretería Pro</span>
+            </div>
+            <div class="nav-actions">
+                <a href="{% url 'inicio' %}" class="secondary-btn small-btn">Seguir comprando</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout_cliente' %}" class="secondary-btn small-btn">Salir</a>
+                {% else %}
+                    <a href="{% url 'login_cliente' %}" class="secondary-btn small-btn">Iniciar sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container cart-page">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="cart-layout">
+            <section class="cart-panel">
+                <h1>Carrito de compras</h1>
+
+                {% if items %}
+                    {% for item in items %}
+                    <div class="cart-item">
+                        <div>
+                            <h3>{{ item.producto.nombre }}</h3>
+                            <p>{{ item.producto.categoria }}</p>
+                        </div>
+                        <div class="cart-controls">
+                            <div class="qty-box">Cantidad: {{ item.cantidad }}</div>
+                            <div class="item-total">${{ item.subtotal }}</div>
+                            <div class="item-actions">
+                                <a href="{% url 'agregar_al_carrito' item.producto.pk %}">+</a>
+                                <a href="{% url 'quitar_del_carrito' item.producto.pk %}">-</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-cart">
+                        <p>Tu carrito está vacío.</p>
+                        <a href="{% url 'inicio' %}" class="primary-btn">Ver productos</a>
+                    </div>
+                {% endif %}
+            </section>
+
+            <aside class="summary-panel">
+                <h2>Resumen</h2>
+                <div class="summary-row">
+                    <span>Productos</span>
+                    <strong>{{ cantidad_total|default:0 }}</strong>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <strong>${{ total|default:0 }}</strong>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'confirmar_compra' %}" class="primary-btn full-width">Confirmar compra</a>
+                {% else %}
+                    <a href="{% url 'login_cliente' %}" class="primary-btn full-width">Inicia sesión para comprar</a>
+                {% endif %}
+            </aside>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería Pro</title>
+    <meta name="description" content="Landing page premium para ferretería, tienda online y administración integrada.">
+    <link rel="stylesheet" href="{% static 'Ferreteria/css/style.css' %}">
+</head>
+<body class="premium-body">
+    <header class="instagram-header premium-header">
+        <div class="container instagram-nav">
+            <div class="brand" aria-label="Logo de Ferretería Pro">
+                <div class="brand-mark" aria-hidden="true"></div>
+                <span>Ferretería Pro</span>
+            </div>
+
+            <div class="search-box" aria-label="Buscar productos">
+                <span>⌕</span>
+                <input type="text" placeholder="Buscar herramientas y materiales">
+            </div>
+
+            <div class="nav-actions" aria-label="Acciones de navegación">
+                <a href="{% url 'carrito' %}" class="icon-button cart-button" aria-label="Carrito">🛒</a>
+                {% if user.is_authenticated %}
+                    <div class="profile-pill">
+                        <div class="avatar">{{ user.username|slice:':1'|upper }}</div>
+                        <span>{{ user.username }}</span>
+                    </div>
+                    <a href="{% url 'logout_cliente' %}" class="secondary-btn small-btn">Salir</a>
+                {% else %}
+                    <a href="{% url 'login_cliente' %}" class="secondary-btn small-btn">Iniciar sesión</a>
+                    <a href="{% url 'registro' %}" class="primary-btn small-btn">Registrarse</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    {% if messages %}
+        <div class="container message-stack">
+            {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main>
+        <section class="hero premium-hero">
+            <div class="container hero-grid premium-grid">
+                <div class="hero-content premium-content">
+                    <span class="kicker">🔥 venta premium</span>
+                    <h1>Herramientas que <span class="highlight">levantan</span> cada obra.</h1>
+                    <p class="hero-copy">
+                        Soluciones profesionales para hogar, obra y mantenimiento con calidad superior, entrega rápida y atención experta.
+                    </p>
+
+                    <div class="cta-row">
+                        <a href="#productos" class="primary-btn">Ver catálogo</a>
+                        <a href="#categorias" class="secondary-btn">Explorar</a>
+                    </div>
+
+                    <div class="hero-meta premium-meta">
+                        <div class="meta-item">
+                            <strong>+2.000</strong>
+                            <span>Artículos</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>4.9/5</strong>
+                            <span>Reputación</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>24h</strong>
+                            <span>Despacho</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual premium-visual" aria-label="Vista de producto destacado">
+                    <div class="showcase premium-showcase">
+                        <div class="showcase-card badge-top premium-badge-top">
+                            <strong>40% OFF</strong>
+                            <span>en ferretería</span>
+                        </div>
+
+                        <div class="showcase-card showcase-main premium-main-card">
+                            <div class="showcase-badge">Top seller</div>
+                            <div class="product-visual premium-product-visual">
+                                <div class="tool-shape" aria-hidden="true"></div>
+                            </div>
+                            <div class="showcase-price premium-price-box">
+                                <div>
+                                    <small>Taladro</small>
+                                    <span>$39.990</span>
+                                </div>
+                                <strong>Nuevo</strong>
+                            </div>
+                        </div>
+
+                        <div class="showcase-card badge-bottom premium-badge-bottom">
+                            <strong>Entrega inmediata</strong>
+                            <span>En Santiago y regiones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="trust-bar">
+            <div class="container trust-grid">
+                <div><span>✔️</span> Calidad premium</div>
+                <div><span>🚚</span> Envíos rápidos</div>
+                <div><span>💬</span> Atención experta</div>
+                <div><span>🔒</span> Compra segura</div>
+            </div>
+        </section>
+
+        <section id="categorias" class="section premium-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Categorías destacadas</h2>
+                    <a href="#productos">Ver todo</a>
+                </div>
+
+                <div class="category-row premium-category-row">
+                    <div class="category-pill"><span class="symbol">🛠️</span> Herramientas</div>
+                    <div class="category-pill"><span class="symbol">⚡</span> Eléctricas</div>
+                    <div class="category-pill"><span class="symbol">🎨</span> Pinturas</div>
+                    <div class="category-pill"><span class="symbol">🚰</span> Gasfitería</div>
+                    <div class="category-pill"><span class="symbol">💡</span> Electricidad</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section premium-features">
+            <div class="container feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🪚</div>
+                    <h3>Selección profesional</h3>
+                    <p>Herramientas y materiales diseñados para proyectos exigentes y trabajos cotidianos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💲</div>
+                    <h3>Precios transparentes</h3>
+                    <p>Sin sorpresas. Todo está claro para que compares y elijas con confianza.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Entrega ágil</h3>
+                    <p>Compra en línea y recibe tu pedido con rapidez para seguir avanzando.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="productos" class="section premium-products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Productos destacados</h2>
+                    <a href="{% url 'carrito' %}">Ir al carrito ({{ total_carrito }})</a>
+                </div>
+
+                <div class="product-grid premium-grid-products">
+                    {% for producto in productos %}
+                    <article class="product-card premium-product-card">
+                        <div class="product-thumb premium-thumb" aria-hidden="true"></div>
+                        <div class="product-content">
+                            <span class="product-tag">{{ producto.categoria }}</span>
+                            <h3>{{ producto.nombre }}</h3>
+                            <div class="product-meta">
+                                <div>
+                                    <div class="product-price">${{ producto.precio }}</div>
+                                    <div class="stock">Stock: {{ producto.stock }}</div>
+                                </div>
+                            </div>
+                            <a href="{% url 'agregar_al_carrito' producto.pk %}" class="buy-btn">Agregar al carrito</a>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <p>No hay productos disponibles por el momento.</p>
+                    {% endfor %}
+                </div>
+
+                <div class="stats-band premium-stats-band">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <strong>12k+</strong>
+                            <span>Clientes felices</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>98%</strong>
+                            <span>Pedidos entregados</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>180+</strong>
+                            <span>Marcas confiables</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>{{ total_productos|default:0 }}</strong>
+                            <span>Productos activos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer premium-footer">
+        <div class="container footer-inner">
+            <div>© 2026 Ferretería Pro</div>
+            <div class="footer-links">
+                <a href="#">Inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#categorias">Categorías</a>
+                <a href="{% url 'carrito' %}">Carrito</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

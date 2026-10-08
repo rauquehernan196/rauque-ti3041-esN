@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel administrador</title>
+    <link rel="stylesheet" href="{% static 'Ferreteria/css/style.css' %}">
+</head>
+<body class="admin-shell-body">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-mark"></div>
+                <span>Ferretería Pro</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{% url 'admin_dashboard' %}" class="active">Dashboard</a>
+                <a href="{% url 'producto_nuevo' %}">Nuevo producto</a>
+                <a href="{% url 'logout_admin' %}">Cerrar sesión</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-panel">
+                <div class="panel-header">
+                    <div>
+                        <p class="panel-kicker">Administración</p>
+                        <h1>Gestión de productos y usuarios</h1>
+                    </div>
+                    <a class="primary-btn" href="{% url 'producto_nuevo' %}">Agregar producto</a>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <section class="admin-section">
+                    <div class="section-head">
+                        <h2>Productos</h2>
+                        <span>{{ productos|length }} registros</span>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for producto in productos %}
+                                <tr class="product-row {% if producto.archivado %}archivado-row{% endif %}">
+                                    <td>
+                                        <strong>{{ producto.nombre }}</strong>
+                                    </td>
+                                    <td>{{ producto.categoria }}</td>
+                                    <td>${{ producto.precio }}</td>
+                                    <td>{{ producto.stock }}</td>
+                                    <td>
+                                        {% if producto.archivado %}
+                                            <span class="status-badge archived">Archivado</span>
+                                        {% else %}
+                                            <span class="status-badge active">Visible</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="action-group">
+                                            <a class="table-btn" href="{% url 'producto_editar' producto.pk %}">Editar</a>
+                                            <form method="post" action="{% url 'producto_archivar' producto.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="table-btn warn">
+                                                    {% if producto.archivado %}Mostrar{% else %}Archivar{% endif %}
+                                                </button>
+                                            </form>
+                                            <form method="post" action="{% url 'producto_eliminar' producto.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="table-btn danger" onclick="return confirm('¿Deseas eliminar este producto?');">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6">No hay productos registrados.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="admin-section">
+                    <div class="section-head">
+                        <h2>Usuarios registrados</h2>
+                        <span>{{ usuarios|length }} cuentas</span>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table small-table">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in usuarios %}
+                                <tr>
+                                    <td>{{ usuario.username }}</td>
+                                    <td>{{ usuario.email|default:'Sin email' }}</td>
+                                    <td>
+                                        {% if usuario.is_active %}
+                                            <span class="status-badge active">Activo</span>
+                                        {% else %}
+                                            <span class="status-badge archived">Inactivo</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="action-group">
+                                            <form method="post" action="{% url 'usuario_toggle' usuario.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="table-btn">
+                                                    {% if usuario.is_active %}Desactivar{% else %}Activar{% endif %}
+                                                </button>
+                                            </form>
+                                            {% if user.pk != usuario.pk %}
+                                            <form method="post" action="{% url 'usuario_eliminar' usuario.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="table-btn danger" onclick="return confirm('¿Deseas eliminar este usuario?');">Eliminar</button>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4">No hay usuarios registrados.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

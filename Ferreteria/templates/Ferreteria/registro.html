@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de clientes</title>
+    <link rel="stylesheet" href="{% static 'Ferreteria/css/style.css' %}">
+</head>
+<body class="auth-page">
+    <div class="auth-shell">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="brand-mark"></div>
+                <span>Ferretería Pro</span>
+            </div>
+            <h1>Crear cuenta</h1>
+            <p>Regístrate para comprar y guardar tu carrito.</p>
+
+            {% if form.errors %}
+                <div class="message error">
+                    Revisa los datos ingresados y corrige los errores.
+                </div>
+            {% endif %}
+
+            <form method="post" class="admin-form auth-form">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="field-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <small class="error-text">{{ field.errors|join:', ' }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="primary-btn full-width">Registrarme</button>
+            </form>
+
+            <div class="auth-footer">
+                <span>¿Ya tienes cuenta?</span>
+                <a href="{% url 'login_cliente' %}">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
